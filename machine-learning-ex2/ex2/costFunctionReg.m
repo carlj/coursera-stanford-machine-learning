@@ -18,10 +18,26 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
+h = sigmoid(X * theta);
 
 
+J_Temp1 = (1 / m .* ( -y' * log(h) - (1 - y)' * log(1 - h) ));
+J_Temp2 = ( ( lambda / (2 * m) ) * sum( theta(2:end).^2 ) );
+
+J = J_Temp1 + J_Temp2;
 
 
+% Solution 1
+gradFirstPart = (1 / m) .* sum( ((h - y) .* X) )
+gradSecondPart = (lambda / m) * theta
+gradSecondPart(1) = 0
+
+grad = gradFirstPart' + gradSecondPart
+
+
+% Solution 2
+% grad = (1 / m) .* sum( ((h - y) .* X) )
+% grad(2:end) = grad(2:end) + (lambda / m) * theta(2:end)'
 % =============================================================
 
 end
