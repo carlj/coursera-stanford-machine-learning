@@ -21,13 +21,22 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% size(p) = 5000 x 1
+% size(X) = 5000 x 401
+% m = 5000
+% num_labels = 10
 
+% size(Theta1) = 25 x 401
+% size(Theta2) = 10 x 26
 
+X = [ones(m, 1) X];
 
+Theta1 = [ones(1, size(Theta1, 2)); Theta1];
 
+temp = sigmoid(X * Theta1');
+temp2 = sigmoid(temp * Theta2');
 
-
-
+[W, p] = max(temp2, [], 2);
 
 % =========================================================================
 
