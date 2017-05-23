@@ -29,14 +29,16 @@ p = zeros(size(X, 1), 1);
 % size(Theta1) = 25 x 401
 % size(Theta2) = 10 x 26
 
-X = [ones(m, 1) X];
+a1 = [ones(m, 1) X]; % add a0(1) to input
 
-Theta1 = [ones(1, size(Theta1, 2)); Theta1];
 
-temp = sigmoid(X * Theta1');
-temp2 = sigmoid(temp * Theta2');
+a2 = sigmoid(a1 * Theta1');
+a2 = [ones(size(a2, 1), 1) a2]; % add a0(2) to result of the hidden layer 
 
-[W, p] = max(temp2, [], 2);
+a3 = sigmoid(a2 * Theta2');
+
+
+[W, p] = max(a3, [], 2);
 
 % =========================================================================
 
