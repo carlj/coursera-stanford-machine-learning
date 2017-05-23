@@ -61,6 +61,4 @@ grad = gradFirstPart' + gradSecondPart;
 
 % =============================================================
 
-grad = grad(:);
-
 end
