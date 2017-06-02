@@ -63,29 +63,63 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+% -------------------------------------------------------------
+% Forwardpropagation to calculate h(x)
+% -------------------------------------------------------------
 
+a1 = [ones(m, 1) X]; % add a0(1) to input
 
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+a2 = [ones(size(a2, 1), 1) a2]; % add a0(2) to result of the hidden layer
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
 
 % -------------------------------------------------------------
+% Cost function
+% -------------------------------------------------------------
+
+y_matrix = eye(num_labels)(y,:);
+J = (1 / m) .* ( -y_matrix .* log(a3) - (1 - y_matrix) .* log(1 - a3));
+J = sum(sum(J, 2));
+
+J_Reg = (lambda / (2 * m)) .* (sum(sum( Theta1(:, 2:end).^2 )) + sum(sum( Theta2(:, 2:end).^2 )));
+J = J + J_Reg;
+
+% -------------------------------------------------------------
+% Backpropagation
+% -------------------------------------------------------------
+
+d3 = a3 - y_matrix;
+
+d2 = Theta2(:, 2:end)' * d3' .* sigmoidGradient(z2)';
+
+delta_2 = d3' * a2;
+Theta2_grad = delta_2 .* (1/m);
+
+delta_1 = d2 * a1;
+Theta1_grad = delta_1 .* (1/m);
+
+% -------------------------------------------------------------
+% Regularized Gradient
+% -------------------------------------------------------------
+
+Theta2_grad_reg = (lambda / m) .* Theta2;
+Theta2_grad_reg(:, 1) = zeros(size(Theta2_grad_reg, 1), 1);
+
+Theta2_grad = Theta2_grad + Theta2_grad_reg;
+
+
+Theta1_grad_reg = (lambda / m) .* Theta1;
+Theta1_grad_reg(:, 1) = zeros(size(Theta1_grad_reg, 1), 1);
+
+Theta1_grad = Theta1_grad + Theta1_grad_reg;
+
 
 % =========================================================================
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
 
 end
