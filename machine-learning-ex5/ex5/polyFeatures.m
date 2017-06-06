@@ -10,15 +10,15 @@ function [X_poly] = polyFeatures(X, p)
 X_poly = zeros(numel(X), p);
 
 % ====================== YOUR CODE HERE ======================
-% Instructions: Given a vector X, return a matrix X_poly where the p-th 
+% Instructions: Given a vector X, return a matrix X_poly where the p-th
 %               column of X contains the values of X to the p-th power.
 %
-% 
+%
 
+power_vector = [1:p];
+X_repmat_matrix = repmat(X, 1, p);
 
-
-
-
+X_poly = X_repmat_matrix .^ power_vector;
 
 % =========================================================================
 
