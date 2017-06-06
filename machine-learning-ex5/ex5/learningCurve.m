@@ -56,13 +56,13 @@ error_val   = zeros(m, 1);
 
 for i = 1:m
 
-  theta = trainLinearReg(X(1:i, :), y(1:i), lambda);
+  X_subset = X(1:i, :);
+  y_subset = y(1:i);
 
-  [trainError, grad] = linearRegCostFunction(X(1:i, :), y(1:i), theta, 0);
-  [cvError, grad] = linearRegCostFunction(Xval, yval, theta, 0);
+  theta = trainLinearReg(X_subset, y_subset, lambda);
 
-  error_train(i) = trainError;
-  error_val(i) = cvError;
+  error_train(i) = linearRegCostFunction(X_subset, y_subset, theta, 0);
+  error_val(i)   = linearRegCostFunction(Xval    , yval    , theta, 0);
 
 end
 
