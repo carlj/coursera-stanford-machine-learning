@@ -97,13 +97,11 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
+    [value index] = max(strcmp(vocabList, str));
 
-
-
-
-
-
-
+    if value == 1
+      word_indices = [word_indices ; index];
+    end
 
 
     % =============================================================
