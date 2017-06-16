@@ -16,8 +16,10 @@ sim = 0;
 %
 %
 
+differenceVector = x1 - x2;
+length = differenceVector' * differenceVector;
 
-
+sim = exp(- length / (2 * sigma^2) );
 
 % =============================================================
 
