@@ -21,8 +21,27 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+M = size(X, 1);
 
 
+for i = 1:M
+
+  currentX = X(i, :);
+
+  currentMin = intmax('int32');
+  for j = 1:K
+
+    newDelta = currentX - centroids(j, :);
+    newDelta = sum(newDelta .* newDelta);
+
+    if newDelta < currentMin
+      idx(i) = j;
+      currentMin = newDelta;
+    endif
+
+  end
+
+end
 
 
 
@@ -30,4 +49,3 @@ idx = zeros(size(X,1), 1);
 % =============================================================
 
 end
-
