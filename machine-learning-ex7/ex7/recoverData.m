@@ -19,9 +19,20 @@ X_rec = zeros(size(Z, 1), size(U, 1));
 %                    recovered_j = v' * U(j, 1:K)';
 %
 %               Notice that U(j, 1:K) is a row vector.
-%               
+%
+
+N = size(Z, 1);
+
+for i = 1:N
+  v = Z(i, :)';
+
+  for j=1:size(U, 1)
+    recovered_j = v' * U(j, 1:K)';
+    X_rec(i, j) = recovered_j;
+  end
 
 
+end
 
 % =============================================================
 
