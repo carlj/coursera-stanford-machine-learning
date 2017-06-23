@@ -16,11 +16,20 @@ Z = zeros(size(X, 1), K);
 %               eigenvector is given as follows:
 %                    x = X(i, :)';
 %                    projection_k = x' * U(:, k);
+%                    projection_k = x' * U(:, 1:K);
 %
 
 
 
 
 % =============================================================
+
+M = size(X, 1);
+
+for i = 1:M
+  x = X(i, :)';
+  projection_k = x' * U(:, 1:K);
+  Z(i, :) = projection_k;
+end
 
 end
