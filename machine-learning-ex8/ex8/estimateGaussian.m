@@ -22,17 +22,23 @@ sigma2 = zeros(n, 1);
 %
 
 
-for i = 1:n
+% First solution
+% for i = 1:n
 
-  currentX = X(:, i);
+%  currentX = X(:, i);
 
-  currentMU = (1 / m) * sum(currentX);
-  currentSIGMA2 = (1 / m) * sum( (currentX - currentMU) .^ 2 );
+%  currentMU = (1 / m) * sum(currentX);
+%  currentSIGMA2 = (1 / m) * sum( (currentX - currentMU) .^ 2 );
 
-  mu(i) = currentMU;
-  sigma2(i) = currentSIGMA2;
+%  mu(i) = currentMU;
+%  sigma2(i) = currentSIGMA2;
 
-end
+%end
+
+
+% Second solution
+mu = mean(X);
+sigma2 = var(X, 1);
 
 % =============================================================
 
