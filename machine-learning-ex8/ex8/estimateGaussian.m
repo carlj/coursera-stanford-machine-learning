@@ -22,13 +22,17 @@ sigma2 = zeros(n, 1);
 %
 
 
+for i = 1:n
 
+  currentX = X(:, i);
 
+  currentMU = (1 / m) * sum(currentX);
+  currentSIGMA2 = (1 / m) * sum( (currentX - currentMU) .^ 2 );
 
+  mu(i) = currentMU;
+  sigma2(i) = currentSIGMA2;
 
-
-
-
+end
 
 % =============================================================
 
