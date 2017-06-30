@@ -44,17 +44,21 @@ Theta_grad = zeros(size(Theta));
 % size(X) % 5 3
 % size(Y) % 5 4
 
+% Helper Matrix that is used in the cost and grad calculations
 filteredMatrix = R .* (Theta * X' - Y')';
 
-J = 1 / 2 * sum( sum( filteredMatrix .^ 2 ));
+% Cost
+cost = 1 / 2 * sum( sum( filteredMatrix .^ 2 ));
 
-X_grad =  filteredMatrix * Theta;
-Theta_grad = filteredMatrix' * X;
+% Regularization for the cost
+regTheta = ((lambda / 2) * sum( sum( Theta .^ 2 ) ));
+regX     = ((lambda / 2) * sum( sum( X     .^ 2 ) ));
 
+J = cost + regTheta + regX;
 
-
-
-
+% Gradient
+X_grad     =  filteredMatrix * Theta + (lambda .* X    );
+Theta_grad = filteredMatrix' * X     + (lambda .* Theta);
 
 
 
