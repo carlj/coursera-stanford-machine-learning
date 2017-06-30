@@ -44,13 +44,12 @@ Theta_grad = zeros(size(Theta));
 % size(X) % 5 3
 % size(Y) % 5 4
 
-innerSumResult = Theta * X' - Y';
-filteredMatrix = R .* (innerSumResult .^ 2)';
+filteredMatrix = R .* (Theta * X' - Y')';
 
-J = 1 / 2 * sum( sum( filteredMatrix ));
+J = 1 / 2 * sum( sum( filteredMatrix .^ 2 ));
 
-X_grad =  (R' .* innerSumResult)' * Theta;
-Theta_grad = (R' .* innerSumResult) * X;
+X_grad =  filteredMatrix * Theta;
+Theta_grad = filteredMatrix' * X;
 
 
 
