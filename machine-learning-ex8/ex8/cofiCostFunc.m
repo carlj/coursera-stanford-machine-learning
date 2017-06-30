@@ -57,7 +57,7 @@ regX     = ((lambda / 2) * sum( sum( X     .^ 2 ) ));
 J = cost + regTheta + regX;
 
 % Gradient
-X_grad     =  filteredMatrix * Theta + (lambda .* X    );
+X_grad     = filteredMatrix  * Theta + (lambda .* X    );
 Theta_grad = filteredMatrix' * X     + (lambda .* Theta);
 
 
